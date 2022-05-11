@@ -3,10 +3,11 @@ import Service from './Service';
 import flourid from '../../assets/images/fluoride.png'
 import cavity from '../../assets/images/cavity.png'
 import teeth from '../../assets/images/whitening.png'
+import Treatment from './Treatment';
 
 const Services = () => {
     return (
-        <div className='my-28 mx-12'>
+        <div className='my-28'>
             <div className='text-center '>
                 <h3 className='text-primary text-xl font-bold uppercase'>Our Services</h3>
                 <h2 className='text-4xl'>Service We Provide</h2>
@@ -15,6 +16,7 @@ const Services = () => {
                     <Service img ={cavity} title ='Cavity Filling'></Service>
                     <Service img ={teeth} title='Teeth Whitening'></Service>
                 </div>
+                <Treatment></Treatment>
             </div>
         </div>
     );

@@ -4,6 +4,7 @@ import {  useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfi
 import { useForm } from "react-hook-form";
 import Loading from '../Shared/Loading';
 import { Link, useNavigate } from 'react-router-dom';
+import useToken from '../../hooks/useToken';
 
 const SignUp = () => {
     const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
@@ -15,6 +16,7 @@ const SignUp = () => {
         error,
       ] = useCreateUserWithEmailAndPassword(auth);
       const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+      const [token] = useToken(user || googleUser)
       const navigate = useNavigate()
       let signInError;
 
@@ -24,15 +26,16 @@ const SignUp = () => {
       if(error || signInError || updateError){
           signInError = <small><p className='text-red-500'>{error?.message || googleError?.message || updateError?.message}</p></small>
       }
-    if(googleUser){
+    if(token){
         console.log(googleUser);
+        navigate('/appointment')
     }
     const onSubmit = async data => {
         console.log(data)
 
         await createUserWithEmailAndPassword(data.email, data.password)
         await updateProfile({ displayName : data.name })
-        navigate('/appointment')
+        
     };
     return (
         <div className='flex justify-center items-center h-screen'>
@@ -109,7 +112,7 @@ const SignUp = () => {
                         </label>
                     </div>
                     {signInError}
-                        <input className="btn w-full max-w-xs" type="submit" value='Login' />
+                        <input className="btn w-full max-w-xs" type="submit" value='Sign Up' />
                     </form>
                     <p><small>Already have an account ? <Link to='/login' className='text-primary'>Please login</Link></small></p>
                     <div className="divider">OR</div>

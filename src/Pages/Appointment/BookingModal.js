@@ -24,7 +24,7 @@ const BookingModal = ({date, treatment, setTreatment, refetch}) => {
 
         }
 
-        fetch('http://localhost:5000/booking',{
+        fetch('https://floating-gorge-57903.herokuapp.com/booking',{
             method: 'POST',
             headers :{
                 'content-type' : 'application/json'
